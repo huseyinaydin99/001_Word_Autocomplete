@@ -3,6 +3,7 @@ package tr.com.huseyinaydin.forms;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 import tr.com.huseyinaydin.services.DictionaryLoader;
 import tr.com.huseyinaydin.services.impl.DictionaryServiceImpl;
 import tr.com.huseyinaydin.services.impl.DictionaryFileReader;
@@ -44,6 +45,11 @@ public class FileSearchForm extends javax.swing.JFrame {
         });
 
         searchTermText1.setToolTipText("Arama yapmak için kelime giriniz...");
+        searchTermText1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchTermText1(evt);
+            }
+        });
 
         searchResultList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Sonuç yok." };
@@ -76,16 +82,32 @@ public class FileSearchForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
-        List<String> resultList = service.searchByPrefix(searchTermText1.getText().toLowerCase());
-        if(resultList.size() <= 0 || searchTermText1.getText().isEmpty() || searchTermText1.getText().isBlank())
-            resultList = new ArrayList<>(){
+    private void search(){
+        TreeSet<String> resultTreeSet = service.searchByPrefix(searchTermText1.getText().toLowerCase());
+        if(resultTreeSet.size() <= 0 || searchTermText1.getText().isEmpty() || searchTermText1.getText().isBlank())
+            resultTreeSet = new TreeSet<String>(){
                 {add("Sonuç yok.");}  
             };
+        List<String> resultList = new ArrayList<>();
+        resultList.addAll(resultTreeSet);
+        /*resultTreeSet.stream().forEach(s -> {
+            if(resultList.add(s))
+                System.out.println("Eklenebildi eğer tekrar yoksa TreeSet / Sıralı kümeye eklenebilir. Sıralı küme TreeSet tekrar kabul etmez! Her bir girdi benzersizdir!");
+            else
+                System.out.println("Eklenemedi eğer tekrar varsa TreeSet / Sıralı kümeye eklenemez. Sıralı küme TreeSet tekrar kabul etmez! Her bir girdi benzersizdir!");
+        });*/
         StringListModel listModel = new StringListModel(resultList);
         //System.out.println(service.searchByPrefix("BROWSA")); // browsa ile başlayan kelimeler
         searchResultList1.setModel(listModel);
+    }
+    
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+        search();
     }//GEN-LAST:event_searchButton1ActionPerformed
+
+    private void searchTermText1(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTermText1
+        search();
+    }//GEN-LAST:event_searchTermText1
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {

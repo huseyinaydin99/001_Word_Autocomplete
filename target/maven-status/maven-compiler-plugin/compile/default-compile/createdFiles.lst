@@ -3,6 +3,7 @@ tr\com\huseyinaydin\forms\FileSearchForm$2.class
 tr\com\huseyinaydin\services\DictionaryLoader.class
 tr\com\huseyinaydin\services\TrieOperations.class
 tr\com\huseyinaydin\forms\FileSearchForm$1.class
+tr\com\huseyinaydin\forms\FileSearchForm$4.class
 tr\com\huseyinaydin\services\impl\DictionaryFileReader.class
 tr\com\huseyinaydin\forms\BasicSearchForm$1.class
 tr\com\huseyinaydin\model\TrieNode.class

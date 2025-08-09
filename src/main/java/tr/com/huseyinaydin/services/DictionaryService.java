@@ -1,7 +1,7 @@
 package tr.com.huseyinaydin.services;
 
-import java.util.List;
+import java.util.TreeSet;
 
 public interface DictionaryService {
-    List<String> searchByPrefix(String prefix);
+    TreeSet<String> searchByPrefix(String prefix);
 }

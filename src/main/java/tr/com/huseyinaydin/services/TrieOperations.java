@@ -1,8 +1,8 @@
 package tr.com.huseyinaydin.services;
 
-import java.util.List;
+import java.util.TreeSet;
 
 public interface TrieOperations {
     void insert(String word);
-    List<String> getWordsWithPrefix(String prefix);
+    TreeSet<String> getWordsWithPrefix(String prefix);
 }
