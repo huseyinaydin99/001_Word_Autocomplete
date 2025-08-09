@@ -1,6 +1,8 @@
 package tr.com.huseyinaydin.forms;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import tr.com.huseyinaydin.services.DictionaryLoader;
 import tr.com.huseyinaydin.services.impl.DictionaryServiceImpl;
 import tr.com.huseyinaydin.services.impl.DictionaryFileReader;
@@ -55,13 +57,10 @@ public class FileSearchForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchTermText1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchButton1))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                .addComponent(searchTermText1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchButton1))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +77,12 @@ public class FileSearchForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
-        StringListModel listModel = new StringListModel(service.searchByPrefix(searchTermText1.getText().toLowerCase()));
+        List<String> resultList = service.searchByPrefix(searchTermText1.getText().toLowerCase());
+        if(resultList.size() <= 0 || searchTermText1.getText().isEmpty() || searchTermText1.getText().isBlank())
+            resultList = new ArrayList<>(){
+                {add("Sonuç yok.");}  
+            };
+        StringListModel listModel = new StringListModel(resultList);
         //System.out.println(service.searchByPrefix("BROWSA")); // browsa ile başlayan kelimeler
         searchResultList1.setModel(listModel);
     }//GEN-LAST:event_searchButton1ActionPerformed

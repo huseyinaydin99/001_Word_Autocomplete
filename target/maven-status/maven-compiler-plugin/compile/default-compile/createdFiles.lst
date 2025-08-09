@@ -15,3 +15,4 @@ tr\com\huseyinaydin\forms\StringListModel.class
 tr\com\huseyinaydin\services\impl\FileDictionaryLoaderImpl.class
 tr\com\huseyinaydin\forms\BasicSearchForm$2.class
 tr\com\huseyinaydin\services\FileReaderService.class
+tr\com\huseyinaydin\forms\FileSearchForm$3.class
