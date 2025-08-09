@@ -1,16 +1,25 @@
 package tr.com.huseyinaydin.forms;
 
+import java.io.IOException;
+import tr.com.huseyinaydin.services.DictionaryLoader;
+import tr.com.huseyinaydin.services.DictionaryService;
 import tr.com.huseyinaydin.services.FileReaderService;
 import tr.com.huseyinaydin.services.impl.DictionaryFileReader;
+import tr.com.huseyinaydin.services.impl.FileDictionaryLoader;
 
 public class FileSearchForm extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(FileSearchForm.class.getName());
     private final FileReaderService fileReaderService;
     
-    public FileSearchForm(FileReaderService fileReaderService) {
+    private DictionaryLoader loader;
+    private DictionaryService service;
+    
+    public FileSearchForm(FileReaderService fileReaderService) throws IOException {
         initComponents();
         this.fileReaderService = fileReaderService;
+        loader = new FileDictionaryLoader("sozluk.txt");
+        service = new DictionaryService(loader);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,11 +59,17 @@ public class FileSearchForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
-
+        System.out.println(service.searchByPrefix("BROWSA")); // browsa ile başlayan kelimeler
     }//GEN-LAST:event_searchButton1ActionPerformed
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new FileSearchForm(new DictionaryFileReader("sozluk.txt")).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new FileSearchForm(new DictionaryFileReader("sozluk.txt")).setVisible(true);
+            } catch (IOException ex) {
+                System.getLogger(FileSearchForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
