@@ -1,13 +1,12 @@
 package tr.com.huseyinaydin.services.impl;
 
-import tr.com.huseyinaydin.services.FileReaderService;
 
+import tr.com.huseyinaydin.services.FileReaderService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import tr.com.huseyinaydin.services.FileReaderService;
 
 public class DictionaryFileReader implements FileReaderService {
 

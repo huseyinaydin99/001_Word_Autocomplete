@@ -2,10 +2,10 @@ package tr.com.huseyinaydin.forms;
 
 import java.io.IOException;
 import tr.com.huseyinaydin.services.DictionaryLoader;
-import tr.com.huseyinaydin.services.DictionaryService;
-import tr.com.huseyinaydin.services.FileReaderService;
+import tr.com.huseyinaydin.services.impl.DictionaryServiceImpl;
 import tr.com.huseyinaydin.services.impl.DictionaryFileReader;
-import tr.com.huseyinaydin.services.impl.FileDictionaryLoader;
+import tr.com.huseyinaydin.services.impl.FileDictionaryLoaderImpl;
+import tr.com.huseyinaydin.services.FileReaderService;
 
 public class FileSearchForm extends javax.swing.JFrame {
 
@@ -13,13 +13,13 @@ public class FileSearchForm extends javax.swing.JFrame {
     private final FileReaderService fileReaderService;
     
     private DictionaryLoader loader;
-    private DictionaryService service;
+    private DictionaryServiceImpl service;
     
     public FileSearchForm(FileReaderService fileReaderService) throws IOException {
         initComponents();
         this.fileReaderService = fileReaderService;
-        loader = new FileDictionaryLoader("sozluk.txt");
-        service = new DictionaryService(loader);
+        loader = new FileDictionaryLoaderImpl("sozluk.txt");
+        service = new DictionaryServiceImpl(loader);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +27,9 @@ public class FileSearchForm extends javax.swing.JFrame {
     private void initComponents() {
 
         searchButton1 = new javax.swing.JButton();
+        searchTermText1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        searchResultList1 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(550, 120));
@@ -38,28 +41,46 @@ public class FileSearchForm extends javax.swing.JFrame {
             }
         });
 
+        searchTermText1.setToolTipText("Arama yapmak için kelime giriniz...");
+
+        searchResultList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Sonuç yok." };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(searchResultList1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(searchButton1)
-                .addGap(150, 150, 150))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchTermText1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton1))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(searchButton1)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton1)
+                    .addComponent(searchTermText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
-        System.out.println(service.searchByPrefix("BROWSA")); // browsa ile başlayan kelimeler
+        StringListModel listModel = new StringListModel(service.searchByPrefix(searchTermText1.getText().toLowerCase()));
+        //System.out.println(service.searchByPrefix("BROWSA")); // browsa ile başlayan kelimeler
+        searchResultList1.setModel(listModel);
     }//GEN-LAST:event_searchButton1ActionPerformed
 
     public static void main(String args[]) {
@@ -73,7 +94,10 @@ public class FileSearchForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton searchButton1;
+    private javax.swing.JList<String> searchResultList1;
+    private javax.swing.JTextField searchTermText1;
     // End of variables declaration//GEN-END:variables
 
 }

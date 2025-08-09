@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import tr.com.huseyinaydin.model.TrieNode;
+import tr.com.huseyinaydin.services.TrieOperations;
 
-public class TrieService {
+public class TrieServiceImpl implements TrieOperations {
 
     private final TrieNode root = new TrieNode();
 

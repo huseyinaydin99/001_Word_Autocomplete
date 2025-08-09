@@ -7,5 +7,7 @@ C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main
 C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\DictionaryService.java
 C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\FileReaderService.java
 C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\DictionaryFileReader.java
-C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\FileDictionaryLoader.java
-C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\TrieService.java
+C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\DictionaryServiceImpl.java
+C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\FileDictionaryLoaderImpl.java
+C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\impl\TrieServiceImpl.java
+C:\Users\Huseyin_Aydin\Documents\NetBeansProjects\001_Word_Autocomplete\src\main\java\tr\com\huseyinaydin\services\TrieOperations.java
